@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>formz.chat - Join the Waitlist</title>
+        <meta
+            name="description"
+            content="formz.chat - Conversational forms powered by AI. Join our waitlist."
+        />
+        <!-- Open Graph / Twitter -->
+        <meta property="og:title" content="formz.chat" />
+        <meta
+            property="og:description"
+            content="Prompt, share, and chat with your responses."
+        />
+        <meta
+            property="og:image"
+            content="https://hectoragvz.github.io/formz.chat.waitlist/og.png"
+        />
+        <meta
+            property="og:url"
+            content="https://hectoragvz.github.io/formz.chat.waitlist/"
+        />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="formz.chat" />
+        <meta
+            name="twitter:description"
+            content="Prompt, share, and chat with your responses."
+        />
+        <meta
+            name="twitter:image"
+            content="https://hectoragvz.github.io/formz.chat.waitlist/og.png"
+        />
+
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html,
+            body {
+                height: 100%;
+            }
+            body {
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    Roboto,
+                    sans-serif;
+                background-color: #ffffff;
+                color: #1a1a1a;
+                line-height: 1.5;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            .container {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 24px;
+            }
+            .title {
+                font-size: 3rem;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                margin-bottom: 8px;
+                color: #111;
+            }
+            .form-wrapper {
+                width: 100%;
+                max-width: 460px;
+            }
+            .input-container {
+                position: relative;
+                width: 100%;
+            }
+            .email-input {
+                width: 100%;
+                border: 1px solid #e5e5e5;
+                border-radius: 14px;
+                outline: none;
+                font-size: 1.05rem;
+                font-family: inherit;
+                background: #fff;
+                color: #1a1a1a;
+                padding: 16px 64px 16px 20px;
+                transition: border-color 0.2s ease;
+            }
+            .email-input:focus {
+                border-color: #a3a3a3;
+            }
+            .email-input::placeholder {
+                color: #a3a3a3;
+            }
+            .submit-btn {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #262626;
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+                padding: 10px 18px;
+                font-size: 1rem;
+                font-weight: 500;
+                font-family: inherit;
+                cursor: pointer;
+                transition:
+                    background-color 0.2s ease,
+                    transform 0.2s ease,
+                    opacity 0.2s ease;
+                white-space: nowrap;
+            }
+            .submit-btn:hover {
+                background: #404040;
+            }
+            .submit-btn:active {
+                transform: translateY(-50%) scale(0.95);
+            }
+            .submit-btn:disabled {
+                background: #d4d4d4;
+                cursor: not-allowed;
+            }
+            .message {
+                text-align: center;
+                margin-top: 16px;
+                font-size: 0.9rem;
+                min-height: 24px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .message.visible {
+                opacity: 1;
+            }
+            .message.success {
+                color: #16a34a;
+            }
+            .message.error {
+                color: #dc2626;
+            }
+            @media (max-width: 480px) {
+                .title {
+                    font-size: 2rem;
+                }
+                .email-input {
+                    font-size: 1rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main class="container">
+            <h1 class="title">formz.chat</h1>
+            <div class="form-wrapper">
+                <form id="waitlist-form">
+                    <div class="input-container">
+                        <input
+                            type="email"
+                            class="email-input"
+                            placeholder="Type your email here"
+                            required
+                            autocomplete="email"
+                            id="email-input"
+                        />
+                        <button
+                            type="submit"
+                            class="submit-btn"
+                            id="submit-btn"
+                        >
+                            Join Waitlist
+                        </button>
+                    </div>
+                </form>
+                <p class="message" id="message"></p>
+            </div>
+        </main>
+
+        <script>
+            const SCRIPT_URL =
+                "https://script.google.com/macros/s/AKfycbway3zboBgu8Ytsl7dO08gJDBFJc75nFHxBGyoBwminaMsXOF4KA8Bc5LrEiq_m1QRl/exec";
+            const form = document.getElementById("waitlist-form");
+            const emailInput = document.getElementById("email-input");
+            const submitBtn = document.getElementById("submit-btn");
+            const message = document.getElementById("message");
+            function showMessage(text, type) {
+                message.textContent = text;
+                message.className = "message visible " + type;
+            }
+            function hideMessage() {
+                message.className = "message";
+            }
+            function setLoading(loading) {
+                submitBtn.disabled = loading;
+                submitBtn.textContent = loading ? "..." : "Join Waitlist";
+            }
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                hideMessage();
+                const email = emailInput.value.trim();
+                if (!email) {
+                    showMessage("Please enter your email address.", "error");
+                    return;
+                }
+                setLoading(true);
+                try {
+                    await fetch(SCRIPT_URL, {
+                        method: "POST",
+                        body: JSON.stringify({ email }),
+                    });
+                    showMessage(
+                        "You're on the list! We'll be in touch soon.",
+                        "success",
+                    );
+                    emailInput.value = "";
+                } catch (error) {
+                    showMessage(
+                        "Something went wrong. Please try again.",
+                        "error",
+                    );
+                }
+                setLoading(false);
+            });
+            emailInput.addEventListener("input", () => {
+                if (message.classList.contains("visible")) {
+                    hideMessage();
+                }
+            });
+        </script>
+    </body>
+</html>
