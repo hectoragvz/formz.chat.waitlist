@@ -1,240 +1,383 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>formz.chat | Join the Waitlist</title>
-        <meta
-            name="description"
-            content="formz.chat - Conversational forms powered by AI. Join our waitlist."
-        />
-        <!-- Open Graph / Twitter -->
-        <meta property="og:title" content="formz.chat | Join the Waitlist" />
-        <meta
-            property="og:description"
-            content="Join the formz.chat waitlist"
-        />
-        <meta
-            property="og:image"
-            content="https://hectoragvz.github.io/formz.chat.waitlist/og.png"
-        />
-        <meta
-            property="og:url"
-            content="https://hectoragvz.github.io/formz.chat.waitlist/"
-        />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="formz.chat | Join the Waitlist" />
-        <meta
-            name="twitter:description"
-            content="Join the formz.chat waitlist"
-        />
-        <meta
-            name="twitter:image"
-            content="https://hectoragvz.github.io/formz.chat.waitlist/og.png"
-        />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>formz.chat | Join the Waitlist</title>
+    <meta
+      name="description"
+      content="formz.chat - Conversational forms powered by AI. Join our waitlist."
+    />
+    <meta property="og:title" content="formz.chat | Join the Waitlist" />
+    <meta property="og:description" content="Join the formz.chat waitlist" />
+    <meta
+      property="og:image"
+      content="https://hectoragvz.github.io/formz.chat.waitlist/og.png"
+    />
+    <meta
+      property="og:url"
+      content="https://hectoragvz.github.io/formz.chat.waitlist/"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="formz.chat | Join the Waitlist" />
+    <meta name="twitter:description" content="Join the formz.chat waitlist" />
+    <meta
+      name="twitter:image"
+      content="https://hectoragvz.github.io/formz.chat.waitlist/og.png"
+    />
 
-        <style>
-            *,
-            *::before,
-            *::after {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
-            html,
-            body {
-                height: 100%;
-            }
-            body {
-                font-family:
-                    system-ui,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    "Segoe UI",
-                    Roboto,
-                    sans-serif;
-                background-color: #ffffff;
-                color: #1a1a1a;
-                line-height: 1.5;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-            .container {
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 24px;
-            }
-            .title {
-                font-size: 3rem;
-                font-weight: 700;
-                letter-spacing: -0.02em;
-                margin-bottom: 8px;
-                color: #111;
-            }
-            .form-wrapper {
-                width: 100%;
-                max-width: 460px;
-            }
-            .input-container {
-                position: relative;
-                width: 100%;
-            }
-            .email-input {
-                width: 100%;
-                border: 1px solid #e5e5e5;
-                border-radius: 14px;
-                outline: none;
-                font-size: 1.05rem;
-                font-family: inherit;
-                background: #fff;
-                color: #1a1a1a;
-                padding: 16px 64px 16px 20px;
-                transition: border-color 0.2s ease;
-            }
-            .email-input:focus {
-                border-color: #a3a3a3;
-            }
-            .email-input::placeholder {
-                color: #a3a3a3;
-            }
-            .submit-btn {
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                background: #262626;
-                color: #fff;
-                border: none;
-                border-radius: 10px;
-                padding: 10px 18px;
-                font-size: 1rem;
-                font-weight: 500;
-                font-family: inherit;
-                cursor: pointer;
-                transition:
-                    background-color 0.2s ease,
-                    transform 0.2s ease,
-                    opacity 0.2s ease;
-                white-space: nowrap;
-            }
-            .submit-btn:hover {
-                background: #404040;
-            }
-            .submit-btn:active {
-                transform: translateY(-50%) scale(0.95);
-            }
-            .submit-btn:disabled {
-                background: #d4d4d4;
-                cursor: not-allowed;
-            }
-            .message {
-                text-align: center;
-                margin-top: 16px;
-                font-size: 0.9rem;
-                min-height: 24px;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-            .message.visible {
-                opacity: 1;
-            }
-            .message.success {
-                color: #16a34a;
-            }
-            .message.error {
-                color: #dc2626;
-            }
-            @media (max-width: 480px) {
-                .title {
-                    font-size: 2rem;
-                }
-                .email-input {
-                    font-size: 1rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <main class="container">
-            <h1 class="title">formz.chat</h1>
-            <div class="form-wrapper">
-                <form id="waitlist-form">
-                    <div class="input-container">
-                        <input
-                            type="email"
-                            class="email-input"
-                            placeholder="Type your email here"
-                            required
-                            autocomplete="email"
-                            id="email-input"
-                        />
-                        <button
-                            type="submit"
-                            class="submit-btn"
-                            id="submit-btn"
-                        >
-                            Join Waitlist
-                        </button>
-                    </div>
-                </form>
-                <p class="message" id="message"></p>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+        color: #1a1a1a;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
+      }
+      .hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 100px 24px;
+        min-height: 100vh;
+      }
+      .hero-content {
+        width: 100%;
+        max-width: 1200px;
+        text-align: center;
+      }
+      .hero-title {
+        font-size: 4.5rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
+        color: #0a0a0a;
+        line-height: 1.1;
+      }
+      .hero-subtitle {
+        font-size: 1.3rem;
+        color: #5a5a5a;
+        margin-bottom: 24px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: 400;
+        line-height: 1.7;
+      }
+      .form-wrapper {
+        width: 100%;
+        max-width: 460px;
+        margin: 0 auto 0;
+      }
+      .input-container {
+        position: relative;
+        width: 100%;
+      }
+      .email-input {
+        width: 100%;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        outline: none;
+        font-size: 1.1rem;
+        font-family: inherit;
+        background: #fff;
+        color: #1a1a1a;
+        padding: 18px 68px 18px 24px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      .email-input:hover {
+        border-color: #d0d0d0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+      .email-input:focus {
+        border-color: #262626;
+        box-shadow: 0 8px 24px rgba(38, 38, 38, 0.12);
+      }
+      .email-input::placeholder {
+        color: #b0b0b0;
+      }
+      .submit-btn {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #262626;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition:
+          background-color 0.3s ease,
+          transform 0.2s ease,
+          box-shadow 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(38, 38, 38, 0.15);
+      }
+      .submit-btn:hover {
+        background: #1a1a1a;
+        box-shadow: 0 8px 20px rgba(38, 38, 38, 0.25);
+        transform: translateY(-50%) translateY(-2px);
+      }
+      .submit-btn:active {
+        transform: translateY(-50%) scale(0.97);
+      }
+      .submit-btn:disabled {
+        background: #d0d0d0;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+      .message {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 0.9rem;
+        min-height: 24px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .message.visible {
+        opacity: 1;
+      }
+      .message.success {
+        color: #16a34a;
+      }
+      .message.error {
+        color: #dc2626;
+      }
+      .video-container {
+        width: 100%;
+        max-width: 920px;
+        margin: 40px auto 0;
+        padding: 0 24px;
+        position: relative;
+      }
+      .video-wrapper {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+      }
+      .video-container video {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        display: block;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        background: #f5f5f5;
+        cursor: pointer;
+        transition: box-shadow 0.3s ease;
+      }
+      .video-container video:hover {
+        box-shadow: 0 24px 72px rgba(0, 0, 0, 0.16);
+      }
+      .video-play-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        pointer-events: none;
+      }
+      .video-container:hover .video-play-overlay {
+        opacity: 1;
+      }
+      .video-play-icon {
+        width: 0;
+        height: 0;
+        border-left: 28px solid #262626;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        margin-left: 6px;
+      }
+      @media (max-width: 768px) {
+        .hero {
+          padding: 80px 24px;
+          min-height: auto;
+        }
+        .hero-title {
+          font-size: 3rem;
+        }
+        .hero-subtitle {
+          font-size: 1.1rem;
+          margin-bottom: 24px;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero {
+          padding: 60px 24px;
+        }
+        .hero-title {
+          font-size: 2.2rem;
+        }
+        .hero-subtitle {
+          font-size: 1rem;
+          margin-bottom: 20px;
+        }
+        .email-input {
+          font-size: 1rem;
+          padding: 16px 60px 16px 20px;
+        }
+        .submit-btn {
+          padding: 10px 16px;
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Build Conversational Forms</h1>
+        <p class="hero-subtitle">
+          formz.chat is the fastest way to create, share, and analyze agentic
+          forms to generate context from user responses.
+        </p>
+        <div class="form-wrapper">
+          <form id="waitlist-form">
+            <div class="input-container">
+              <input
+                type="email"
+                class="email-input"
+                placeholder="Type your email here"
+                required
+                autocomplete="email"
+                id="email-input"
+              />
+              <button type="submit" class="submit-btn" id="submit-btn">
+                Join Waitlist
+              </button>
             </div>
-        </main>
+          </form>
+          <p class="message" id="message"></p>
+        </div>
+        <div class="video-container">
+          <div class="video-wrapper">
+            <video autoplay muted loop playsinline>
+              <source src="demo.mp4" type="video/mp4" />
+            </video>
+            <div class="video-play-overlay">
+              <div class="video-play-icon"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <script>
-            const SCRIPT_URL =
-                "https://script.google.com/macros/s/AKfycbway3zboBgu8Ytsl7dO08gJDBFJc75nFHxBGyoBwminaMsXOF4KA8Bc5LrEiq_m1QRl/exec";
-            const form = document.getElementById("waitlist-form");
-            const emailInput = document.getElementById("email-input");
-            const submitBtn = document.getElementById("submit-btn");
-            const message = document.getElementById("message");
-            function showMessage(text, type) {
-                message.textContent = text;
-                message.className = "message visible " + type;
-            }
-            function hideMessage() {
-                message.className = "message";
-            }
-            function setLoading(loading) {
-                submitBtn.disabled = loading;
-                submitBtn.textContent = loading ? "..." : "Join Waitlist";
-            }
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-                hideMessage();
-                const email = emailInput.value.trim();
-                if (!email) {
-                    showMessage("Please enter your email address.", "error");
-                    return;
-                }
-                setLoading(true);
-                try {
-                    await fetch(SCRIPT_URL, {
-                        method: "POST",
-                        body: JSON.stringify({ email }),
-                    });
-                    showMessage(
-                        "You're on the list! We'll be in touch soon.",
-                        "success",
-                    );
-                    emailInput.value = "";
-                } catch (error) {
-                    showMessage(
-                        "Something went wrong. Please try again.",
-                        "error",
-                    );
-                }
-                setLoading(false);
-            });
-            emailInput.addEventListener("input", () => {
-                if (message.classList.contains("visible")) {
-                    hideMessage();
-                }
-            });
-        </script>
-    </body>
+    <script>
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbway3zboBgu8Ytsl7dO08gJDBFJc75nFHxBGyoBwminaMsXOF4KA8Bc5LrEiq_m1QRl/exec";
+      const form = document.getElementById("waitlist-form");
+      const emailInput = document.getElementById("email-input");
+      const submitBtn = document.getElementById("submit-btn");
+      const message = document.getElementById("message");
+      function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "message visible " + type;
+      }
+      function hideMessage() {
+        message.className = "message";
+      }
+      function setLoading(loading) {
+        submitBtn.disabled = loading;
+        submitBtn.textContent = loading ? "..." : "Join Waitlist";
+      }
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        hideMessage();
+        const email = emailInput.value.trim();
+        if (!email) {
+          showMessage("Please enter your email address.", "error");
+          return;
+        }
+        setLoading(true);
+        try {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            body: JSON.stringify({ email }),
+          });
+          showMessage("You're on the list! We'll be in touch soon.", "success");
+          emailInput.value = "";
+        } catch (error) {
+          showMessage("Something went wrong. Please try again.", "error");
+        }
+        setLoading(false);
+      });
+      emailInput.addEventListener("input", () => {
+        if (message.classList.contains("visible")) {
+          hideMessage();
+        }
+      });
+
+      // Fullscreen video playback
+      const video = document.querySelector(".video-container video");
+      const videoContainer = document.querySelector(".video-container");
+
+      video.addEventListener("click", async () => {
+        try {
+          if (video.requestFullscreen) {
+            await video.requestFullscreen();
+          } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+          } else if (video.mozRequestFullScreen) {
+            video.mozRequestFullScreen();
+          } else if (video.msRequestFullscreen) {
+            video.msRequestFullscreen();
+          }
+        } catch (error) {
+          console.error("Fullscreen request failed:", error);
+        }
+      });
+
+      videoContainer.addEventListener("click", async () => {
+        try {
+          if (videoContainer.requestFullscreen) {
+            await videoContainer.requestFullscreen();
+          } else if (videoContainer.webkitRequestFullscreen) {
+            videoContainer.webkitRequestFullscreen();
+          } else if (videoContainer.mozRequestFullScreen) {
+            videoContainer.mozRequestFullScreen();
+          } else if (videoContainer.msRequestFullscreen) {
+            videoContainer.msRequestFullscreen();
+          }
+        } catch (error) {
+          console.error("Fullscreen request failed:", error);
+        }
+      });
+    </script>
+  </body>
 </html>
