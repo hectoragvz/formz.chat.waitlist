@@ -211,16 +211,11 @@
         opacity: 0;
         transition: all 0.3s ease;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        pointer-events: auto;
+        pointer-events: none; /* Let clicks pass through to the container */
         z-index: 10;
       }
       .video-container:hover .video-play-overlay {
         opacity: 1;
-      }
-      @media (max-width: 768px) {
-        .video-play-overlay {
-          opacity: 1;
-        }
       }
       .video-play-icon {
         width: 0;
@@ -241,6 +236,16 @@
         .hero-subtitle {
           font-size: 1.1rem;
           margin-bottom: 24px;
+        }
+        .video-play-overlay {
+          opacity: 1; /* Always show on mobile */
+          width: 60px;
+          height: 60px;
+        }
+        .video-play-icon {
+          border-left-width: 20px;
+          border-top-width: 12px;
+          border-bottom-width: 12px;
         }
       }
       @media (max-width: 480px) {
@@ -291,9 +296,9 @@
           </form>
           <p class="message" id="message"></p>
         </div>
-        <div class="video-container">
+        <div class="video-container" id="video-trigger">
           <div class="video-wrapper">
-            <video autoplay muted loop playsinline>
+            <video autoplay muted loop playsinline id="main-video">
               <source src="demo.mp4" type="video/mp4" />
             </video>
             <div class="video-play-overlay">
@@ -311,17 +316,21 @@
       const emailInput = document.getElementById("email-input");
       const submitBtn = document.getElementById("submit-btn");
       const message = document.getElementById("message");
+
       function showMessage(text, type) {
         message.textContent = text;
         message.className = "message visible " + type;
       }
+
       function hideMessage() {
         message.className = "message";
       }
+
       function setLoading(loading) {
         submitBtn.disabled = loading;
         submitBtn.textContent = loading ? "..." : "Join Waitlist";
       }
+
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         hideMessage();
@@ -343,46 +352,56 @@
         }
         setLoading(false);
       });
+
       emailInput.addEventListener("input", () => {
         if (message.classList.contains("visible")) {
           hideMessage();
         }
       });
 
-      // Fullscreen video playback
-      const video = document.querySelector(".video-container video");
-      const videoContainer = document.querySelector(".video-container");
+      // --- FULLSCREEN VIDEO FIX FOR MOBILE/IOS ---
+      const video = document.getElementById("main-video");
+      const videoTrigger = document.getElementById("video-trigger");
 
-      video.addEventListener("click", async () => {
+      const handleFullscreen = async () => {
+        // Unmute and play so the user can hear the video in fullscreen
+        video.muted = false;
+        video.play();
+
         try {
-          if (video.requestFullscreen) {
+          if (video.webkitEnterFullscreen) {
+            // This is the specific method for iOS/iPhone
+            video.webkitEnterFullscreen();
+          } else if (video.requestFullscreen) {
+            // Standard for Android and Desktop
             await video.requestFullscreen();
           } else if (video.webkitRequestFullscreen) {
+            // Safari Desktop
             video.webkitRequestFullscreen();
-          } else if (video.mozRequestFullScreen) {
-            video.mozRequestFullScreen();
           } else if (video.msRequestFullscreen) {
+            // Old IE
             video.msRequestFullscreen();
           }
-        } catch (error) {
-          console.error("Fullscreen request failed:", error);
+        } catch (err) {
+          console.error("Fullscreen error:", err);
         }
-      });
+      };
 
-      videoContainer.addEventListener("click", async () => {
-        try {
-          if (videoContainer.requestFullscreen) {
-            await videoContainer.requestFullscreen();
-          } else if (videoContainer.webkitRequestFullscreen) {
-            videoContainer.webkitRequestFullscreen();
-          } else if (videoContainer.mozRequestFullScreen) {
-            videoContainer.mozRequestFullScreen();
-          } else if (videoContainer.msRequestFullscreen) {
-            videoContainer.msRequestFullscreen();
-          }
-        } catch (error) {
-          console.error("Fullscreen request failed:", error);
+      // Listener on the container to capture all clicks
+      videoTrigger.addEventListener("click", handleFullscreen);
+
+      // Re-mute the video when the user exits fullscreen to return to "Hero" mode
+      const exitHandler = () => {
+        if (!document.fullscreenElement && !document.webkitIsFullScreen) {
+          video.muted = true;
         }
+      };
+
+      document.addEventListener("fullscreenchange", exitHandler);
+      document.addEventListener("webkitfullscreenchange", exitHandler);
+      // iOS specific exit event
+      video.addEventListener("webkitendfullscreen", () => {
+        video.muted = true;
       });
     </script>
   </body>
