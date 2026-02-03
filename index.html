@@ -290,6 +290,26 @@
         margin-left: 6px;
       }
 
+      .video-footer {
+        text-align: center;
+        margin-top: var(--spacing-lg);
+        font-size: 0.95rem;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+      }
+
+      .video-footer a {
+        color: var(--color-text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .video-footer a:hover {
+        color: #000;
+        text-decoration: underline;
+      }
+
       /* Tablet & Medium Devices */
       @media (max-width: 1024px) {
         :root {
@@ -442,6 +462,14 @@
             <div class="video-play-overlay">
               <div class="video-play-icon"></div>
             </div>
+          </div>
+          <div class="video-footer">
+            <p>
+              👆 Roast my demo or reach out via
+              <a href="https://x.com/hectoragvz">X</a>,
+              <a href="https://www.linkedin.com/in/hectoragvz/">LinkedIn</a>, or
+              <a href="mailto:hectoragvz@formz.chat">email</a>
+            </p>
           </div>
         </div>
       </div>
