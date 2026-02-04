@@ -39,12 +39,15 @@
         --spacing-3xl: 60px;
         --spacing-4xl: 80px;
 
-        /* Colors */
+        /* Colors - formz.chat neutral palette */
         --color-bg-primary: #ffffff;
-        --color-bg-secondary: #fafafa;
-        --color-text-primary: #0a0a0a;
-        --color-text-secondary: #5a5a5a;
+        --color-bg-secondary: #f5f5f5;
+        --color-text-primary: #171717;
+        --color-text-secondary: #525252;
         --color-border: #e5e5e5;
+        --color-border-focus: #d4d4d4;
+        --color-button-bg: #171717;
+        --color-button-hover: #262626;
         --color-success: #16a34a;
         --color-error: #dc2626;
       }
@@ -82,27 +85,29 @@
 
       .hero-content {
         width: 100%;
-        max-width: 1400px;
+        max-width: 640px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: var(--spacing-3xl);
-        align-items: start;
+        align-items: center;
+        text-align: center;
       }
 
       .hero-left {
-        flex: 1;
+        width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
       }
 
       .hero-title {
-        font-size: 5rem;
+        font-size: 3.5rem;
         font-weight: 500;
         letter-spacing: -0.03em;
         margin-bottom: var(--spacing-md);
         color: var(--color-text-primary);
         line-height: 1.1;
-        text-align: left;
+        text-align: center;
       }
 
       .hero-subtitle {
@@ -111,7 +116,8 @@
         margin-bottom: var(--spacing-2xl);
         font-weight: 400;
         line-height: 1.7;
-        text-align: left;
+        text-align: center;
+        max-width: 560px;
       }
 
       .form-wrapper {
@@ -140,7 +146,7 @@
 
       .email-input:focus {
         outline: none;
-        border-color: var(--color-border);
+        border-color: var(--color-border-focus);
         box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
       }
 
@@ -157,7 +163,7 @@
         right: var(--spacing-sm);
         top: 50%;
         transform: translateY(-50%);
-        background: #000;
+        background: var(--color-button-bg);
         color: #fff;
         border: none;
         border-radius: 9999px;
@@ -172,6 +178,10 @@
         font-family: inherit;
         cursor: pointer;
         transition: all 0.2s ease;
+      }
+
+      .submit-btn:hover:not(:disabled) {
+        background: var(--color-button-hover);
       }
 
       .submit-btn:focus-visible {
@@ -210,133 +220,7 @@
         color: var(--color-error);
       }
 
-      .video-container {
-        width: 100%;
-        position: relative;
-        flex: 1;
-      }
 
-      .video-wrapper {
-        position: relative;
-        width: 100%;
-      }
-
-      .video-wrapper::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 16px;
-        background: radial-gradient(
-            ellipse at 30% 50%,
-            rgba(255, 0, 128, 0.4),
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse at 70% 50%,
-            rgba(0, 150, 255, 0.4),
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse at 50% 100%,
-            rgba(138, 43, 226, 0.3),
-            transparent 50%
-          );
-        filter: blur(40px);
-        pointer-events: none;
-        z-index: -1;
-      }
-
-      .video-container video {
-        width: 100%;
-        height: auto;
-        border-radius: 16px;
-        display: block;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        background: #f5f5f5;
-        cursor: pointer;
-        position: relative;
-      }
-
-      .video-play-overlay {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80px;
-        height: 80px;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        opacity: 0;
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        pointer-events: none;
-        z-index: 10;
-      }
-
-      .video-container:hover .video-play-overlay {
-        opacity: 1;
-      }
-
-      .video-play-icon {
-        width: 0;
-        height: 0;
-        border-left: 28px solid #262626;
-        border-top: 18px solid transparent;
-        border-bottom: 18px solid transparent;
-        margin-left: 6px;
-      }
-
-      .video-footer {
-        text-align: center;
-        margin-top: var(--spacing-lg);
-        font-size: 0.95rem;
-        color: var(--color-text-secondary);
-        line-height: 1.6;
-      }
-
-      .video-footer a {
-        color: var(--color-text-primary);
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.2s ease;
-      }
-
-      .video-footer a:hover {
-        color: #000;
-        text-decoration: underline;
-      }
-
-      /* Tablet & Medium Devices */
-      @media (max-width: 1024px) {
-        :root {
-          --spacing-4xl: 64px;
-          --spacing-3xl: 48px;
-        }
-
-        .hero-content {
-          flex-direction: column;
-          gap: var(--spacing-2xl);
-        }
-
-        .hero-title {
-          text-align: center;
-        }
-
-        .hero-subtitle {
-          text-align: center;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .form-wrapper {
-          margin-left: auto;
-          margin-right: auto;
-        }
-      }
 
       /* Tablets */
       @media (max-width: 768px) {
@@ -358,18 +242,6 @@
           font-size: 1.1rem;
           margin-bottom: var(--spacing-lg);
         }
-
-        .video-play-overlay {
-          opacity: 1;
-          width: 60px;
-          height: 60px;
-        }
-
-        .video-play-icon {
-          border-left-width: 20px;
-          border-top-width: 12px;
-          border-bottom-width: 12px;
-        }
       }
 
       /* Mobile Devices */
@@ -385,7 +257,7 @@
         }
 
         .hero-title {
-          font-size: 2.2rem;
+          font-size: 1.8rem;
           margin-bottom: var(--spacing-sm);
         }
 
@@ -394,27 +266,22 @@
           margin-bottom: var(--spacing-lg);
         }
 
-        .form-wrapper {
-          margin-left: auto;
-          margin-right: auto;
-        }
-
         .email-input {
           font-size: 1rem;
           padding: var(--spacing-md) 3.5rem var(--spacing-md) var(--spacing-md);
         }
       }
     </style>
+    <script src="https://unpkg.com/convex@1.3.1/dist/browser.bundle.js"></script>
   </head>
   <body>
     <section class="hero">
       <div class="hero-content">
         <div class="hero-left">
-          <h1 class="hero-title">Introducing Conversational Forms</h1>
+          <h1 class="hero-title">Build Conversational Forms</h1>
           <p class="hero-subtitle">
-            formz.chat allows you to create and share forms your users can
-            simply chat with. Get the data you need, ask for insights, and
-            review specific responses.
+            formz.chat is the AI-powered form builder that talks to you, asks
+            questions, and autocompletes using natural language.
           </p>
           <div class="form-wrapper">
             <form id="waitlist-form">
@@ -422,7 +289,7 @@
                 <input
                   type="email"
                   class="email-input"
-                  placeholder="Joint the waitlist with your email"
+                  placeholder="Join the waitlist with your email"
                   required
                   autocomplete="email"
                   id="email-input"
@@ -435,12 +302,12 @@
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
+                    stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     aria-hidden="true"
@@ -454,124 +321,85 @@
             <p class="message" id="message"></p>
           </div>
         </div>
-        <div class="video-container" id="video-trigger">
-          <div class="video-wrapper">
-            <video loop id="main-video">
-              <source src="Demo2.mp4" type="video/mp4" />
-            </video>
-            <div class="video-play-overlay">
-              <div class="video-play-icon"></div>
-            </div>
-          </div>
-          <div class="video-footer">
-            <p>
-              👆 Roast my demo or reach out via
-              <a href="https://x.com/hectoragvz">X</a>,
-              <a href="https://www.linkedin.com/in/hectoragvz/">LinkedIn</a>, or
-              <a href="mailto:hectoragvz@formz.chat">email</a>
-            </p>
-          </div>
-        </div>
       </div>
     </section>
 
     <script>
-      const SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbyhsemZkKvrYZktf_RdltAenQzEh5eU3nXxTkuuanpAN7d7ojAi2HzJTVYWofk9BMYb/exec";
-      const form = document.getElementById("waitlist-form");
-      const emailInput = document.getElementById("email-input");
-      const submitBtn = document.getElementById("submit-btn");
-      const message = document.getElementById("message");
+      const CONVEX_URL = "https://calm-anteater-637.convex.cloud";
+      let client;
 
-      function showMessage(text, type) {
-        message.textContent = text;
-        message.className = "message visible " + type;
-      }
-
-      function hideMessage() {
-        message.className = "message";
-      }
-
-      function setLoading(loading) {
-        submitBtn.disabled = loading;
-      }
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        hideMessage();
-        const email = emailInput.value.trim();
-        if (!email) {
-          showMessage("Please enter your email address.", "error");
-          return;
+      function initializeConvex() {
+        if (typeof window.convex !== "undefined" && window.convex.ConvexClient) {
+          client = new window.convex.ConvexClient(CONVEX_URL);
+          setupForm();
+        } else {
+          // Retry if Convex library hasn't loaded yet
+          setTimeout(initializeConvex, 100);
         }
-        setLoading(true);
-        try {
-          await fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            body: new URLSearchParams({ email }),
-          });
+      }
 
-          // Optimistic success (request was sent)
-          showMessage("You're on the list! We'll be in touch soon.", "success");
-          emailInput.value = "";
-        } catch (error) {
-          // Network / browser-level failure only
-          showMessage("Something went wrong. Please try again.", "error");
+      function setupForm() {
+        const form = document.getElementById("waitlist-form");
+        const emailInput = document.getElementById("email-input");
+        const submitBtn = document.getElementById("submit-btn");
+        const message = document.getElementById("message");
+
+        function showMessage(text, type) {
+          message.textContent = text;
+          message.className = "message visible " + type;
         }
-        setLoading(false);
-      });
 
-      emailInput.addEventListener("input", () => {
-        if (message.classList.contains("visible")) {
+        function hideMessage() {
+          message.className = "message";
+        }
+
+        function setLoading(loading) {
+          submitBtn.disabled = loading;
+        }
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
           hideMessage();
-        }
-      });
 
-      // --- FULLSCREEN VIDEO FIX FOR MOBILE/IOS ---
-      const video = document.getElementById("main-video");
-      const videoTrigger = document.getElementById("video-trigger");
-
-      const handleFullscreen = async () => {
-        // Unmute and play so the user can hear the video in fullscreen
-        video.muted = false;
-        video.play();
-
-        try {
-          if (video.webkitEnterFullscreen) {
-            // This is the specific method for iOS/iPhone
-            video.webkitEnterFullscreen();
-          } else if (video.requestFullscreen) {
-            // Standard for Android and Desktop
-            await video.requestFullscreen();
-          } else if (video.webkitRequestFullscreen) {
-            // Safari Desktop
-            video.webkitRequestFullscreen();
-          } else if (video.msRequestFullscreen) {
-            // Old IE
-            video.msRequestFullscreen();
+          const email = emailInput.value.trim().toLowerCase();
+          if (!email) {
+            showMessage("Please enter your email address.", "error");
+            return;
           }
-        } catch (err) {
-          console.error("Fullscreen error:", err);
-        }
-      };
 
-      // Listener on the container to capture all clicks
-      videoTrigger.addEventListener("click", handleFullscreen);
+          setLoading(true);
+          try {
+            const result = await client.mutation("mutations:addToWaitlist", {
+              email,
+            });
 
-      // Re-mute the video when the user exits fullscreen to return to "Hero" mode
-      const exitHandler = () => {
-        if (!document.fullscreenElement && !document.webkitIsFullScreen) {
-          video.muted = true;
-        }
-      };
+            if (result.alreadyExists) {
+              showMessage("You're already on the list!", "success");
+            } else {
+              showMessage("You're on the list! We'll be in touch soon.", "success");
+            }
+            emailInput.value = "";
+          } catch (error) {
+            console.error("Error adding to waitlist:", error);
+            showMessage("Something went wrong. Please try again.", "error");
+          } finally {
+            setLoading(false);
+          }
+        });
 
-      document.addEventListener("fullscreenchange", exitHandler);
-      document.addEventListener("webkitfullscreenchange", exitHandler);
-      // iOS specific exit event
-      video.addEventListener("webkitendfullscreen", () => {
-        video.muted = true;
-      });
+        emailInput.addEventListener("input", () => {
+          if (message.classList.contains("visible")) {
+            hideMessage();
+          }
+        });
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeConvex);
+      } else {
+        initializeConvex();
+      }
     </script>
   </body>
 </html>
